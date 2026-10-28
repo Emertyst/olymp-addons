@@ -1,0 +1,38 @@
+\ProvidesPackage{olymp-comm}
+
+\@ifpackageloaded{olymp}{}{%
+  \PackageError{olymp-comm}{olymp.sty must be loaded before olymp-comm}{}%
+}
+
+\def\kw@Communication{Communication}
+\def\kw@FirstRun{First Run}
+\def\kw@SecondRun{Second Run}
+\def\kw@InputProtocol{Input}
+\def\kw@OutputProtocol{Output}
+
+
+\newcommand{\problemsubsectionfont}{\large}
+\newcommand{\problemsubsubsectionfont}{\normalsize}
+
+\newcommand{\createsubsection}{\@newsubsection}
+
+\def\@newsubsection#1#2{\DeclareRobustCommand{#1}{
+{\beforeproblemsectioncaption\noindent\bf\problemsubsectionfont
+\textsf{#2}}
+\nopagebreak\par\afterproblemsectioncaption}
+}
+
+\newcommand{\createsubsubsection}{\@newsubsubsection}
+
+\def\@newsubsubsection#1#2{\DeclareRobustCommand{#1}{
+{\beforeproblemsectioncaption\noindent\bf\problemsubsubsectionfont
+\textsf{#2}}
+\nopagebreak\par\afterproblemsectioncaption}
+}
+
+
+\createsection{\Communication}{\kw@Communication}
+\createsubsection{\FirstRun}{\kw@FirstRun}
+\createsubsection{\SecondRun}{\kw@SecondRun}
+\createsubsubsection{\InputProtocol}{\kw@InputProtocol}
+\createsubsubsection{\OutputProtocol}{\kw@OutputProtocol}
