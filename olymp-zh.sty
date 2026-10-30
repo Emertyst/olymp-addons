@@ -53,6 +53,43 @@
 \def\kw@defaultinputname{test}
 \def\kw@defaultoutputname{answer}
 
+% 页脚
+\renewcommand{\@oddfoot}{%
+  \gdef\problemletter{\if@arabic\arabic{problem}\else\Alph{problem}\fi}%
+  \ifrevisionsignature
+    \gdef\rsigfooter{, \kw@revision\ \therevision}%
+  \else
+    \gdef\rsigfooter{}%
+  \fi
+  \ifdisplayauthorinfooter
+    \gdef\thefooter{%
+      ~\quad{\kw@Problem\ \problemletter
+      \ifdefined\DivisionNumber{ (Div.~\DivisionNumber)}\fi}%
+      \hfill
+      {\kw@ProblemAuthor~\lastproblemauthor}%
+      \hfill
+      第 \thepage\ 页，共 \pageref{LastPage}\ 页\rsigfooter\quad~}%
+  \else
+    \ifdisplaydeveloperinfooter
+      \gdef\thefooter{%
+        ~\quad{\kw@Problem\ \problemletter}%
+        \hfill
+        {\kw@ProblemDeveloper~\lastproblemdeveloper}%
+        \hfill
+        第 \thepage\ 页，共 \pageref{LastPage}\ 页\rsigfooter\quad~}%
+    \else
+      \gdef\thefooter{%
+        \hfil 第 \thepage\ 页，共 \pageref{LastPage}\ 页\rsigfooter\hfil}%
+    \fi
+  \fi
+  \parbox{\textwidth}{%
+    \hrule
+    \vspace{6pt}%
+    \sffamily
+    \thefooter
+  }%
+}
+
 % 通信题
 \def\kw@Communication{通信}
 \def\kw@FirstRun{第一次运行}
